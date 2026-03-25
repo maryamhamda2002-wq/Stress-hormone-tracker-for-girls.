@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Stress & Hormone Tracker 💖</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Stress & Hormone Tracker For GIRLS 💜</h1>
+
+    <form method="POST">
+        <label>Mood:</label>
+        <select name="mood" required>
+            {% for mood in moods %}
+            <option value="{{ mood }}">{{ mood }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Sleep (hours):</label>
+        <input type="number" name="sleep" step="0.1" required>
+
+        <label>Study Hours:</label>
+        <input type="number" name="study_hours" step="0.1" required>
+
+        <label>Cycle Phase:</label>
+        <select name="cycle_phase" required>
+            {% for phase in cycle_phases %}
+            <option value="{{ phase }}">{{ phase }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Analyze 💖</button>
+    </form>
+
+    {% if stress_level %}
+    <div class="result-card">
+        <h2>{{ stress_level }}</h2>
+
+        <h3>Suggestions:</h3>
+        <ul>
+            {% for s in suggestions %}
+            <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Hormone Phase Tip:</h3>
+        <p>{{ hormone_tip }}</p>
+    </div>
+
+    <div class="result-card">
+        <h2>Hormone Analysis 🧬</h2>
+        <p><strong>Status:</strong> {{ imbalance }}</p>
+        <p><strong>Details:</strong> {{ details }}</p>
+        <p><strong>Advice:</strong> {{ tips }}</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
